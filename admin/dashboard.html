@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Header Navigation (replacing sidebar) -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <i class="bi bi-speedometer2 me-2"></i>Painel Administrativo
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarAdmin">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html"><i class="bi bi-house me-1"></i> Página Inicial</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex align-items-center text-white">
+                        <i class="bi bi-person-circle fs-5 me-2"></i>
+                        <div class="me-3">
+                            <small>Logado como</small>
+                            <div>Administrador</div>
+                        </div>
+                        <a href="login.html" class="btn btn-outline-light">
+                            <i class="bi bi-box-arrow-right me-2"></i>Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content (now full width) -->
+        <div class="px-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Gerenciamento de Usuários</h5>
+                    <div>
+                        <!-- Buttons removed as requested -->
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6 mb-2">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                <input type="text" id="searchInput" class="form-control" placeholder="Buscar por nome, CPF ou e-mail...">
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <select class="form-select" id="bankFilter">
+                                <option value="">Todos os Bancos</option>
+                                <option value="001">Banco do Brasil</option>
+                                <option value="033">Santander</option>
+                                <option value="104">Caixa Econômica Federal</option>
+                                <option value="237">Bradesco</option>
+                                <option value="341">Itaú</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <select class="form-select" id="stateFilter">
+                                <option value="">Todos os Estados</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="PR">Paraná</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="usersTable">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th>E-mail</th>
+                                    <th>Telefone</th>
+                                    <th>Banco</th>
+                                    <th>PIS/PASEP</th>
+                                    <th>Data Cadastro</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Sem dados de usuários cadastrados -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Visualização de Usuário -->
+    <div class="modal fade" id="viewUserModal" tabindex="-1" aria-labelledby="viewUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewUserModalLabel">Detalhes do Usuário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Dados Pessoais</h6>
+                            <hr>
+                            <p><strong>Nome:</strong> <span id="modalNome"></span></p>
+                            <p><strong>CPF:</strong> <span id="modalCpf"></span></p>
+                            <p><strong>RG:</strong> <span id="modalRg"></span></p>
+                            <p><strong>Data de Nascimento:</strong> <span id="modalNascimento"></span></p>
+                            <p><strong>E-mail:</strong> <span id="modalEmail"></span></p>
+                            <p><strong>Telefone:</strong> <span id="modalTelefone"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Dados Profissionais e Bancários</h6>
+                            <hr>
+                            <p><strong>PIS/PASEP:</strong> <span id="modalPis"></span></p>
+                            <p><strong>Profissão:</strong> <span id="modalProfissao"></span></p>
+                            <p><strong>Banco:</strong> <span id="modalBanco"></span></p>
+                            <p><strong>Agência:</strong> <span id="modalAgencia"></span></p>
+                            <p><strong>Conta:</strong> <span id="modalConta"></span></p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <h6>Endereço</h6>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p><strong>CEP:</strong> <span id="modalCep"></span></p>
+                                </div>
+                                <div class="col-md-8">
+                                    <p><strong>Logradouro:</strong> <span id="modalLogradouro"></span></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p><strong>Número:</strong> <span id="modalNumero"></span></p>
+                                </div>
+                                <div class="col-md-8">
+                                    <p><strong>Complemento:</strong> <span id="modalComplemento"></span></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p><strong>Bairro:</strong> <span id="modalBairro"></span></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p><strong>Cidade:</strong> <span id="modalCidade"></span></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p><strong>Estado:</strong> <span id="modalEstado"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteConfirmModalLabel">Confirmar Exclusão</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Tem certeza que deseja excluir este usuário? Esta ação não pode ser desfeita.</p>
+                    <p><strong>Nome:</strong> <span id="deleteUserName"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Edit User Modal -->
+    <div id="editUserModalContainer"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Excel Export Library -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <!-- PDF Export Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.5.28/dist/jspdf.plugin.autotable.min.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        // Initialize dashboard when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initDashboard();
+        });
+    </script>
+    <script>
+        // Inicializar tooltips
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+            
+            // Configurar botões de ação
+            setupActionButtons();
+            
+            // Configurar filtros
+            setupFilters();
+            
+            // Código de exportação removido
+        });
+        
+        function setupActionButtons() {
+            // Botões de visualizar
+            const viewButtons = document.querySelectorAll('.btn-outline-primary');
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const modal = new bootstrap.Modal(document.getElementById('viewUserModal'));
+                    modal.show();
+                });
+            });
+            
+            // Botões de excluir
+            const deleteButtons = document.querySelectorAll('.btn-outline-danger');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const name = row.cells[0].textContent;
+                    document.getElementById('deleteUserName').textContent = name;
+                    
+                    const modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+                    modal.show();
+                });
+            });
+            
+            // Confirmar exclusão
+            document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+                const userName = document.getElementById('deleteUserName').textContent;
+                
+                // Fechar o modal de confirmação
+                const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
+                modal.hide();
+                
+                // Mostrar mensagem de sucesso
+                Swal.fire({
+                    title: 'Usuário Excluído',
+                    text: `O usuário ${userName} foi excluído com sucesso.`,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    // Aqui seria implementada a lógica real de exclusão
+                    // Por enquanto, apenas simulamos removendo a linha da tabela
+                    const rows = document.querySelectorAll('#usersTable tbody tr');
+                    rows.forEach(row => {
+                        if (row.cells[0].textContent === userName) {
+                            row.remove();
+                        }
+                    });
+                });
+            });
+        }
+        
+        function setupFilters() {
+            // Filtro de busca
+            document.getElementById('searchInput').addEventListener('keyup', function() {
+                const searchTerm = this.value.toLowerCase();
+                const rows = document.querySelectorAll('#usersTable tbody tr');
+                
+                rows.forEach(row => {
+                    const name = row.cells[0].textContent.toLowerCase();
+                    const cpf = row.cells[1].textContent.toLowerCase();
+                    const email = row.cells[2].textContent.toLowerCase();
+                    
+                    if (name.includes(searchTerm) || cpf.includes(searchTerm) || email.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Filtro de banco
+            document.getElementById('bankFilter').addEventListener('change', function() {
+                const bankValue = this.value.toLowerCase();
+                const rows = document.querySelectorAll('#usersTable tbody tr');
+                
+                rows.forEach(row => {
+                    if (!bankValue || row.cells[4].textContent.toLowerCase().includes(bankValue)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Filtro de estado (simulado com dados de exemplo)
+            document.getElementById('stateFilter').addEventListener('change', function() {
+                const stateValue = this.value;
+                if (!stateValue) {
+                    // Mostrar todas as linhas se nenhum estado for selecionado
+                    const rows = document.querySelectorAll('#usersTable tbody tr');
+                    rows.forEach(row => {
+                        row.style.display = '';
+                    });
+                    return;
+                }
+                
+                // Simulação de filtro por estado (em um sistema real, isso seria feito com dados reais)
+                Swal.fire({
+                    title: 'Filtro Aplicado',
+                    text: `Filtrando usuários do estado: ${stateValue}`,
+                    icon: 'info',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            });
+        }
+        
+        // Código JavaScript simplificado
+    </script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Administrativo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="py-4 text-center">
+            <h1 class="mb-3">Área Administrativa</h1>
+            <p class="lead">Acesso restrito para administradores do sistema</p>
+            <a href="../index.html" class="btn btn-outline-secondary mb-4">
+                <i class="bi bi-arrow-left me-2"></i>Voltar para página inicial
+            </a>
+        </header>
+
+        <div class="row justify-content-center my-5">
+            <div class="col-md-5">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-secondary text-white">
+                        <h4 class="mb-0"><i class="bi bi-shield-lock me-2"></i>Login Administrativo</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="alert alert-warning" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            Área restrita. Acesso permitido apenas para usuários autorizados.
+                        </div>
+
+                        <form id="loginForm" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Usuário</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                    <input type="text" class="form-control" id="username" required>
+                                    <div class="invalid-feedback">Por favor, informe seu usuário.</div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Senha</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-key"></i></span>
+                                    <input type="password" class="form-control" id="password" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <div class="invalid-feedback">Por favor, informe sua senha.</div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3" id="twoFactorAuthDiv" style="display: none;">
+                                <label for="twoFactorCode" class="form-label">Código de Verificação</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
+                                    <input type="text" class="form-control" id="twoFactorCode" placeholder="Digite o código recebido">
+                                    <div class="invalid-feedback">Por favor, informe o código de verificação.</div>
+                                </div>
+                                <small class="text-muted">Um código de verificação foi enviado para seu e-mail ou telefone.</small>
+                            </div>
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">Lembrar-me neste dispositivo</label>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
+                            </div>
+
+                            <div class="text-center mt-3">
+                                <a href="#" id="forgotPassword">Esqueceu a senha?</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-3 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-shield-check text-primary me-3" style="font-size: 2rem;"></i>
+                            <div>
+                                <h5 class="mb-1">Acesso Seguro</h5>
+                                <p class="mb-0 small">Este sistema utiliza autenticação de dois fatores e criptografia avançada para proteger seus dados.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="mt-5 py-3 text-center text-muted">
+            <p>&copy; 2023 Sistema de Cadastro e Gerenciamento. Todos os direitos reservados.</p>
+            <p><a href="#" class="text-decoration-none">Política de Privacidade</a> | <a href="#" class="text-decoration-none">Termos de Uso</a></p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        });
+
+        // Form validation
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            if (this.checkValidity()) {
+                // Get username and password
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                // Verificação de credenciais
+                if (username === 'pedro' && password === 'pedro123') {
+                    // Login bem-sucedido
+                    Swal.fire({
+                        title: 'Autenticação Bem-sucedida',
+                        text: 'Bem-vindo, Administrador!',
+                        icon: 'success',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.href = 'dashboard.html';
+                    });
+                } else {
+                    // Credenciais inválidas
+                    Swal.fire({
+                        title: 'Erro de Autenticação',
+                        text: 'Usuário ou senha incorretos. Tente novamente.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            }
+            
+            this.classList.add('was-validated');
+        });
+
+        // Forgot password
+        document.getElementById('forgotPassword').addEventListener('click', function(event) {
+            event.preventDefault();
+            
+            Swal.fire({
+                title: 'Recuperação de Senha',
+                text: 'Informe seu e-mail para receber instruções de recuperação de senha.',
+                input: 'email',
+                inputPlaceholder: 'Seu e-mail',
+                showCancelButton: true,
+                confirmButtonText: 'Enviar',
+                cancelButtonText: 'Cancelar',
+                showLoaderOnConfirm: true,
+                preConfirm: (email) => {
+                    return new Promise((resolve) => {
+                        setTimeout(() => {
+                            resolve();
+                        }, 1000);
+                    });
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'E-mail Enviado',
+                        text: 'Instruções de recuperação de senha foram enviadas para seu e-mail.',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

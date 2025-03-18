@@ -1,0 +1,208 @@
+/* Main Styles */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+header {
+    margin-top: 20px;
+}
+
+/* Card Styling */
+.card {
+    border-radius: 10px;
+    border: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styling */
+.btn {
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background-color: #4361ee;
+    border-color: #4361ee;
+}
+
+.btn-primary:hover {
+    background-color: #3a56d4;
+    border-color: #3a56d4;
+}
+
+.btn-secondary {
+    background-color: #4f5d75;
+    border-color: #4f5d75;
+}
+
+.btn-secondary:hover {
+    background-color: #404b5e;
+    border-color: #404b5e;
+}
+
+/* Form Styling */
+.form-control {
+    border-radius: 5px;
+    padding: 10px 15px;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+    border-color: #4361ee;
+    box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* Admin Panel Styling */
+.navbar-dark {
+    background-color: #343a40;
+}
+
+.admin-content {
+    padding: 0;
+}
+
+.table-responsive {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Footer Styling */
+footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+    position: absolute;
+    z-index: 1000;
+    display: none;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
+
+.dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #4361ee;
+}
+
+/* Table Action Buttons */
+#usersTable .dropdown {
+    position: relative;
+}
+
+#usersTable .dropdown-menu {
+    right: 0;
+    left: auto;
+    margin-top: 0.125rem;
+}
+
+/* Action buttons styling */
+.action-buttons {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;
+    min-width: 120px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .btn-lg {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .lead {
+        font-size: 1rem;
+    }
+    
+    #usersTable .dropdown-menu {
+        position: absolute;
+        right: 0;
+        left: auto;
+    }
+    
+    /* Fix for action buttons in responsive mode */
+    #usersTable td:last-child,
+    .action-buttons {
+        white-space: nowrap;
+        min-width: 120px;
+    }
+    
+    /* Make table horizontally scrollable on small screens */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Adjust button size for better mobile display */
+    #usersTable .btn-sm {
+        padding: 0.25rem 0.5rem;
+        margin-right: 2px;
+    }
+    
+    /* Ensure action buttons are visible and properly spaced */
+    .action-buttons {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 3px;
+    }
+}

@@ -1,0 +1,180 @@
+<!-- Edit User Modal Template -->
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalLabel">Editar Usuário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editUserForm" class="needs-validation" novalidate>
+                    <input type="hidden" id="editUserCpf">
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <h6>Dados Pessoais</h6>
+                            <hr>
+                            
+                            <div class="mb-3">
+                                <label for="editNome" class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" id="editNome" required>
+                                <div class="invalid-feedback">Por favor, informe o nome completo.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="editRg" class="form-label">RG</label>
+                                <input type="text" class="form-control" id="editRg" required>
+                                <div class="invalid-feedback">Por favor, informe o RG.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="editDataNascimento" class="form-label">Data de Nascimento</label>
+                                <input type="date" class="form-control" id="editDataNascimento" required>
+                                <div class="invalid-feedback">Por favor, informe a data de nascimento.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="editEmail" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="editEmail" required>
+                                <div class="invalid-feedback">Por favor, informe um e-mail válido.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="editTelefone" class="form-label">Telefone</label>
+                                <input type="text" class="form-control" id="editTelefone" required>
+                                <div class="invalid-feedback">Por favor, informe um telefone válido.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h6>Dados Profissionais e Bancários</h6>
+                            <hr>
+                            
+                            <div class="mb-3">
+                                <label for="editPis" class="form-label">PIS/PASEP</label>
+                                <input type="text" class="form-control" id="editPis" required>
+                                <div class="invalid-feedback">Por favor, informe o PIS/PASEP.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="editProfissao" class="form-label">Profissão</label>
+                                <input type="text" class="form-control" id="editProfissao">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="editBanco" class="form-label">Banco</label>
+                                <select class="form-select" id="editBanco" required>
+                                    <option value="">Selecione o banco</option>
+                                    <option value="001">Banco do Brasil</option>
+                                    <option value="033">Santander</option>
+                                    <option value="104">Caixa Econômica Federal</option>
+                                    <option value="237">Bradesco</option>
+                                    <option value="341">Itaú</option>
+                                    <option value="260">Nubank</option>
+                                    <option value="077">Inter</option>
+                                    <option value="outros">Outros</option>
+                                </select>
+                                <div class="invalid-feedback">Por favor, selecione o banco.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="editAgencia" class="form-label">Agência</label>
+                                <input type="text" class="form-control" id="editAgencia" required>
+                                <div class="invalid-feedback">Por favor, informe a agência.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="editConta" class="form-label">Conta</label>
+                                <input type="text" class="form-control" id="editConta" required>
+                                <div class="invalid-feedback">Por favor, informe a conta.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <h6>Endereço</h6>
+                            <hr>
+                            
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="editCep" class="form-label">CEP</label>
+                                    <input type="text" class="form-control" id="editCep" required>
+                                    <div class="invalid-feedback">Por favor, informe o CEP.</div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="editLogradouro" class="form-label">Logradouro</label>
+                                    <input type="text" class="form-control" id="editLogradouro" required>
+                                    <div class="invalid-feedback">Por favor, informe o logradouro.</div>
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <label for="editNumero" class="form-label">Número</label>
+                                    <input type="text" class="form-control" id="editNumero" required>
+                                    <div class="invalid-feedback">Por favor, informe o número.</div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <label for="editComplemento" class="form-label">Complemento</label>
+                                    <input type="text" class="form-control" id="editComplemento">
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <label for="editBairro" class="form-label">Bairro</label>
+                                    <input type="text" class="form-control" id="editBairro" required>
+                                    <div class="invalid-feedback">Por favor, informe o bairro.</div>
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <label for="editCidade" class="form-label">Cidade</label>
+                                    <input type="text" class="form-control" id="editCidade" required>
+                                    <div class="invalid-feedback">Por favor, informe a cidade.</div>
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <label for="editEstado" class="form-label">Estado</label>
+                                    <select class="form-select" id="editEstado" required>
+                                        <option value="">UF</option>
+                                        <option value="AC">AC</option>
+                                        <option value="AL">AL</option>
+                                        <option value="AP">AP</option>
+                                        <option value="AM">AM</option>
+                                        <option value="BA">BA</option>
+                                        <option value="CE">CE</option>
+                                        <option value="DF">DF</option>
+                                        <option value="ES">ES</option>
+                                        <option value="GO">GO</option>
+                                        <option value="MA">MA</option>
+                                        <option value="MT">MT</option>
+                                        <option value="MS">MS</option>
+                                        <option value="MG">MG</option>
+                                        <option value="PA">PA</option>
+                                        <option value="PB">PB</option>
+                                        <option value="PR">PR</option>
+                                        <option value="PE">PE</option>
+                                        <option value="PI">PI</option>
+                                        <option value="RJ">RJ</option>
+                                        <option value="RN">RN</option>
+                                        <option value="RS">RS</option>
+                                        <option value="RO">RO</option>
+                                        <option value="RR">RR</option>
+                                        <option value="SC">SC</option>
+                                        <option value="SP">SP</option>
+                                        <option value="SE">SE</option>
+                                        <option value="TO">TO</option>
+                                    </select>
+                                    <div class="invalid-feedback">Por favor, selecione o estado.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="saveEditBtn">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+</div>
